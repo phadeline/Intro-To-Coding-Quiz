@@ -15,7 +15,7 @@ let questions = [
       "inside the body tag",
       "inside the head tag",
       "after the HTML tag",
-      "Bettween the head and body tag",
+      "Between the head and body tag",
     ],
     correctanswer: "inside the head tag",
   },
@@ -36,7 +36,22 @@ let questions = [
   },
 ];
 
+let count = 60;
+let score = 0;
+
 let body = document.body;
+
+//creates the text explaining the rules of the quiz
+const elementh1 = document.createElement("h1");
+const elementh2 = document.createElement("h2");
+elementh1.textContent = "Welcome to Rutgers Bootcamp Coding Quiz!!";
+elementh2.textContent =
+  "Here are the rules: Choose the best answer for each question. IF you pick a wrong answer your time will decrease.";
+
+body.appendChild(elementh1);
+body.appendChild(elementh2);
+
+//creates div container which will have the questions and answers as its children
 const container = document.createElement("div");
 container.setAttribute("id", "qacontainer");
 body.appendChild(container);
@@ -79,10 +94,12 @@ function displayQuestion(questions, index) {
 
   unorderedList.addEventListener("click", function (event) {
     let correctanswer = questions[index].correctanswer;
-    if (event.target.value != correctanswer) {
-      //Manage Time
+    if (event.target.innerText != correctanswer) {
+      //decrease time
+    } else {
+      score += 10;
+      console.log(score);
     }
-    //else then increase score
 
     if (index + 1 < questions.length) {
       displayQuestion(questions, index + 1);
