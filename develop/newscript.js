@@ -51,6 +51,19 @@ elementh2.textContent =
 body.appendChild(elementh1);
 body.appendChild(elementh2);
 
+//created an element that hold the countdown timer
+let time = document.createElement("p");
+let timer = body.appendChild(time);
+timer.setAttribute("id", "timer");
+
+//this is the function that will countdown every second
+timer.innerHTML = "";
+function myTimer() {
+  count--;
+  timer.textContent = count;
+}
+
+
 //creates div container which will have the questions and answers as its children
 const container = document.createElement("div");
 container.setAttribute("id", "qacontainer");
@@ -115,4 +128,5 @@ let btn = document.getElementById("button");
 btn.addEventListener("click", function (event) {
   displayQuestion(questions, 0);
   btn.setAttribute("style", "display:none");
+  setInterval(myTimer, 1000);
 });
