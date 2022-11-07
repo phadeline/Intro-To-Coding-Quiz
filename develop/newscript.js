@@ -38,6 +38,8 @@ let questions = [
 
 let count = 60;
 let score = 0;
+let length = questions.length;
+let index = 0;
 
 let body = document.body;
 
@@ -55,14 +57,6 @@ body.appendChild(elementh2);
 let time = document.createElement("p");
 let timer = body.appendChild(time);
 timer.setAttribute("id", "timer");
-
-//this is the function that will countdown every second
-timer.innerHTML = "";
-function myTimer() {
-  count--;
-  timer.textContent = count;
-}
-
 
 //creates div container which will have the questions and answers as its children
 const container = document.createElement("div");
@@ -108,7 +102,7 @@ function displayQuestion(questions, index) {
   unorderedList.addEventListener("click", function (event) {
     let correctanswer = questions[index].correctanswer;
     if (event.target.innerText != correctanswer) {
-      //decrease time
+      count -= 10;
     } else {
       score += 10;
       console.log(score);
@@ -120,6 +114,8 @@ function displayQuestion(questions, index) {
       console.log("no more questions");
       //enter initials and score
     }
+
+    //need another if statement that says if count = 0 then enter initials and score
   });
 }
 
@@ -128,5 +124,13 @@ let btn = document.getElementById("button");
 btn.addEventListener("click", function (event) {
   displayQuestion(questions, 0);
   btn.setAttribute("style", "display:none");
-  setInterval(myTimer, 1000);
+  var Countdown = setInterval(function () {
+    if (count > 0) {
+      count--;
+      timer.textContent = count;
+    } else {
+      timer.textContent = "Game Over";
+      clearInterval(Countdown);
+    }
+  }, 1000);
 });
