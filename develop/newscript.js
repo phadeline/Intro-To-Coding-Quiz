@@ -63,6 +63,50 @@ const container = document.createElement("div");
 container.setAttribute("id", "qacontainer");
 body.appendChild(container);
 
+//This function creates the container for the user to be able to enter their name and score.
+function SaveName() {
+  //instructions on how to save score
+  let instructions = document.createElement("h2");
+  body.appendChild(instructions);
+  instructions.textContent =
+    "Enter your name and Press the Button to save score";
+
+  //This creates the form element
+  let form = document.createElement("form");
+  body.appendChild(form);
+
+  //Div container that will be the container forthe user name input
+  let holder = document.createElement("div");
+  form.appendChild(holder);
+
+  let label = document.createElement("label");
+  holder.appendChild(label);
+  label.textContent = "Your name: ";
+
+  //input box where user will put their name
+  let input = document.createElement("input");
+  holder.appendChild(input);
+  input.setAttribute("id", "username");
+  let player = document.querySelector("#username").value;
+
+  //button the user can press to save score
+  let buttonname = document.createElement("button");
+  holder.appendChild(buttonname);
+  buttonname.setAttribute("id", "buttonname");
+  let pressme = document.getElementById("buttonname");
+  buttonname.setAttribute("style", "width:50px; height: 20px;");
+  buttonname.textContent = "Go!";
+
+  //add evenlister to button so that user can submit their name
+  pressme.addEventListener("click", function (event) {
+    if (player == "") {
+      alert("Please enter a name in the input box");
+      onclick.stopPropagation();
+      
+    }
+  });
+}
+
 function displayQuestion(questions, index) {
   qacontainer.innerHTML = "";
 
@@ -112,16 +156,18 @@ function displayQuestion(questions, index) {
       displayQuestion(questions, index + 1);
     } else {
       console.log("no more questions");
-      //enter initials and score
+      qacontainer.innerHTML = "";
+      count = null;
+      elementh1.textContent = "";
+      elementh2.textContent = "";
+      SaveName();
     }
-
-    //need another if statement that says if count = 0 then enter initials and score
   });
 }
 
 let btn = document.getElementById("button");
 
-btn.addEventListener("click", function (event) {
+btn.addEventListener("click", function () {
   displayQuestion(questions, 0);
   btn.setAttribute("style", "display:none");
   var Countdown = setInterval(function () {
@@ -131,6 +177,13 @@ btn.addEventListener("click", function (event) {
     } else {
       timer.textContent = "Game Over";
       clearInterval(Countdown);
+      if (count == 0) {
+        qacontainer.innerHTML = "";
+        elementh1.textContent = "";
+        elementh2.textContent = "";
+        SaveName();
+      }
+      return count;
     }
   }, 1000);
 });
