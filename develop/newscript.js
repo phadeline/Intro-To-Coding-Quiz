@@ -87,7 +87,6 @@ function SaveName() {
   let input = document.createElement("input");
   holder.appendChild(input);
   input.setAttribute("id", "username");
-  let player = document.querySelector("#username").value;
 
   //button the user can press to save score
   let buttonname = document.createElement("button");
@@ -95,18 +94,50 @@ function SaveName() {
   buttonname.setAttribute("id", "buttonname");
   let pressme = document.getElementById("buttonname");
   buttonname.setAttribute("style", "width:50px; height: 20px;");
-  buttonname.textContent = "Go!";
+  buttonname.textContent = "Add!";
 
-  //add evenlister to button so that user can submit their name
+//
+  var info = JSON.parse(localStorage.getItem("names")) || [];
+
+  //add eventlister to the button so that user can submit their name
   pressme.addEventListener("click", function (event) {
-    if (player == "") {
+    event.stopPropagation();
+    event.preventDefault();
+
+    //EVERY PLAYER NAME WILL BE PUT INTO AN ARRAY AFTER THEY CLICK THE BUTTON
+    let player = document.getElementById("username").value;
+
+    info.push({
+      playername: player,
+      scores: score,
+    });
+
+    localStorage.setItem("names", JSON.stringify(info));
+
+    //need to set score and player name into local storage
+
+    if (player === "") {
       alert("Please enter a name in the input box");
-      onclick.stopPropagation();
-      
-    }
+    } else
+      for (i = 0; i < info.length; i++) {
+        //creating an a "p" element so that with every loop a new p element is created
+        let lists = document.createElement("p");
+
+        //the "p" element has an class of listname
+        lists.setAttribute("class", "listname");
+
+        //the content of the list will be names of the players
+
+        // let storage = localStorage.getItem("names");
+
+        lists.textContent = info[i].playername + " " + info[i].scores;
+
+        body.appendChild(lists);
+      }
   });
 }
 
+//This function creates the unorderlist which will contain the answers and questions.
 function displayQuestion(questions, index) {
   qacontainer.innerHTML = "";
 
@@ -143,6 +174,7 @@ function displayQuestion(questions, index) {
   li3.textContent = questions[index].answers[2];
   li4.textContent = questions[index].answers[3];
 
+  //added click event to unorderlist so that everytime the user clicks an answer it moves on to the set next set of questions and answers.
   unorderedList.addEventListener("click", function (event) {
     let correctanswer = questions[index].correctanswer;
     if (event.target.innerText != correctanswer) {
@@ -161,13 +193,14 @@ function displayQuestion(questions, index) {
       elementh1.textContent = "";
       elementh2.textContent = "";
       SaveName();
+      return;
     }
   });
 }
 
 let btn = document.getElementById("button");
 
-btn.addEventListener("click", function () {
+btn.addEventListener("click", function (event) {
   displayQuestion(questions, 0);
   btn.setAttribute("style", "display:none");
   var Countdown = setInterval(function () {
@@ -182,6 +215,7 @@ btn.addEventListener("click", function () {
         elementh1.textContent = "";
         elementh2.textContent = "";
         SaveName();
+        return;
       }
       return count;
     }
