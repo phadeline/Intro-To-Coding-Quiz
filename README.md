@@ -1,4 +1,4 @@
-# Rutgers-bootcamp-quiz-
+# Intro to Coding 101 Quiz
 
 ## Description
 

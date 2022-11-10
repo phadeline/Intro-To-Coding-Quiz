@@ -51,7 +51,7 @@ body.setAttribute(
 //creates the text explaining the rules of the quiz
 const elementh1 = document.createElement("h1");
 const elementh2 = document.createElement("h2");
-elementh1.textContent = "Welcome to Rutgers Bootcamp Coding Quiz!!";
+elementh1.textContent = "Welcome To Intro to Coding 101 Quiz!!";
 elementh2.textContent =
   "Here are the rules: Choose the best answer for each question. IF you pick a wrong answer your time will DECREASE.";
 
