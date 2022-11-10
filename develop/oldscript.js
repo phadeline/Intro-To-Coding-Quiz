@@ -1,4 +1,9 @@
-//Lines 3 to 31 are the variables that I created for the questions and answers
+
+
+
+
+// This is the old script file that I started with. I decided to start a new script file instead for this project.
+//This file is not being used.
 
 var questions = [
   "What does CSS stand for?",
