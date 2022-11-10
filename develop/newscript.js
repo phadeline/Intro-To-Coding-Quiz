@@ -124,11 +124,7 @@ function SaveName() {
   buttonname.textContent = "Add!";
 
   //info will contain all the user info (names and score).
-  var info = [];
-  let infos = JSON.parse(localStorage.getItem("names"));
-
-  //this is done so that info won't be an empty every time a user puts add their information.
-  info = infos;
+  var info = JSON.parse(localStorage.getItem("names")) || [];
 
   //add eventlister to the button so that user can submit their name
   pressme.addEventListener("click", function (event) {
@@ -139,7 +135,7 @@ function SaveName() {
     let player = document.getElementById("username").value;
 
     //the player's name and their score will be added to the variable info
-    info.unshift({
+    info.push({
       playername: player,
       scores: score,
     });
