@@ -139,7 +139,7 @@ function SaveName() {
     let player = document.getElementById("username").value;
 
     //the player's name and their score will be added to the variable info
-    info.push({
+    info.unshift({
       playername: player,
       scores: score,
     });
