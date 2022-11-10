@@ -161,7 +161,8 @@ function SaveName() {
 
         // let storage = localStorage.getItem("names");
 
-        lists.textContent = info[i].playername + " " + info[i].scores;
+        lists.textContent =
+          info[i].playername + " Your Score: " + info[i].scores;
 
         body.appendChild(lists);
       }
